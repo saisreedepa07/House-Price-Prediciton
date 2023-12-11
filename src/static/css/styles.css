@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* adding background color*/
+html{
+    background-color:bisque;
+}
+
+/* Image styling */
+.image-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100vw;
+    height: auto;
+    display: block;
+}
+
+/* Content styling */
+.content {
+    width: 100%;
+    padding: 20px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Heading styling */
+h1.title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:indianred;
+    font-weight: bolder;
+}
+
+/* Form styling */
+form {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    padding: 0;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+/* input fields styling */
+.input-field {
+    flex: 0 0 calc(33.33% - 20px);
+    margin-bottom: 20px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 5px;
+}
+
+.input-field label {
+    margin-right: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:black;
+    margin-bottom: 15px; 
+}
+.input-field input,
+.input-field select {
+    flex: 1;
+    width: 100%;
+    padding: 8px;
+    border: 1px #ccc;
+    background-color:antiquewhite;
+    border-style:hidden;
+    border-radius: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+/* select styling */
+select[name="model"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    width: fit-content;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+select[name="model"],
+button[type="submit"] {
+    margin-top: 10px;
+}
+
+.model-container {
+    margin-bottom: 20px;
+}
+
+/* button styling */
+.button-container {
+    text-align: center;
+    margin-top: 10px;
+    padding-right: 250px;
+    font-weight: bolder;
+}
+
+button[type="submit"] {
+    padding: 10px;
+    background-color:green;
+    color: #fff;
+    border: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+/*prediciton value styling*/
+#result {
+    color: indianred;
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+}
+
+/*graphs styling*/
+.chart-canvas {
+    width: 300px; 
+    height: 200px; 
+    margin: 10px; 
+}
+

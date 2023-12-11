@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    <!--Image-->
+    <div class="container">
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image/img.jpg') }}" alt="Logo">
+        </div>
+
+    <!--Heading-->
+    <div class="content">
+        <h1 class="title">House Price Prediction</h1>
+    
+    <form id="predictionForm">
+        <!--Rooms-->
+        <div class="input-field">
+            <label for="Rooms">Rooms</label>
+            <input type="text" id="Rooms" name="Rooms" placeholder="Number of rooms" autocomplete="off">
+        </div>
+
+        <!--Distance-->
+        <div class="input-field">
+            <label for="Distance">Distance</label>
+            <input type="text" id="Distance" name="Distance" placeholder="Distance to city center" autocomplete="off">
+        </div>
+
+        <!--Postcode-->
+        <div class="input-field">
+            <label for="Postcode">Postcode</label>
+            <input type="text" id="Postcode" name="Postcode" placeholder="Area postcode" autocomplete="off">
+        </div>
+
+        <!--Bathroom-->
+        <div class="input-field">
+            <label for="Bathroom">Bathroom</label>
+            <input type="text" id="Bathroom" name="Bathroom" placeholder="Number of bathrooms" autocomplete="off">
+        </div>
+
+        <!--Car-->
+        <div class="input-field">
+            <label for="Car">Car</label>
+            <input type="text" id="Car" name="Car" placeholder="Number of car spaces" autocomplete="off">
+        </div>
+
+        <!--Landsize-->
+        <div class="input-field">
+            <label for="Landsize">Landsize</label>
+            <input type="text" id="Landsize" name="Landsize" placeholder="Area size in square meters" autocomplete="off">
+        </div>
+
+        <!--Building Area-->
+        <div class="input-field">
+            <label for="BuildingArea">Building Area</label>
+            <input type="text" id="BuildingArea" name="BuildingArea" placeholder="Building area in square meters" autocomplete="off">
+        </div>
+
+        <!--YearBuilt-->
+        <div class="input-field">
+            <label for="YearBuilt">Year Built</label>
+            <input type="text" id="YearBuilt" name="YearBuilt" placeholder="Year the property was built" autocomplete="off">
+        </div>  
+
+        <!--Lattitude-->
+        <div class="input-field">
+            <label for="Lattitude">Latitude</label>
+            <input type="text" id="Lattitude" name="Lattitude" placeholder="Geographical latitude" autocomplete="off">
+        </div>
+
+        <!--Longitude-->
+        <div class="input-field">
+            <label for="Longtitude">Longitude</label>
+            <input type="text" id="Longtitude" name="Longtitude" placeholder="Geographical longitude" autocomplete="off">
+        </div>
+
+        <!--Propertycount-->
+        <div class="input-field">
+            <label for="Propertycount">Property Count</label>
+            <input type="text" id="Propertycount" name="Propertycount" placeholder="Total count of properties in the area" autocomplete="off">
+        </div>    
+
+        <!--BuildingAge-->
+        <div class="input-field">
+            <label for="BuildingAge">Building Age</label>
+            <input type="text" id="BuildingAge" name="BuildingAge" placeholder="Age of the building" autocomplete="off">
+        </div>
+
+        <!--CouncilArea_encoded-->
+        <div class="input-field">
+            <label for="CouncilArea_encoded">Council Area</label>
+            <input type="text" id="CouncilArea_encoded" name="CouncilArea_encoded" placeholder="Encoded council area" autocomplete="off">
+        </div>
+
+        <!--Suburb_encoded-->
+        <div class="input-field">
+            <label for="Suburb_encoded">Suburb</label>
+            <input type="text" id="Suburb_encoded" name="Suburb_encoded" placeholder="Encoded suburb" autocomplete="off">
+        </div>
+
+        <!--Year-->
+        <div class="input-field">
+            <label for="Year">Year</label>
+            <input type="text" id="Year" name="Year" placeholder="Year" autocomplete="off">
+        </div>
+
+        <!--Month-->
+        <div class="dropdown input-field">
+            <label for="monthDropdown">Month</label>
+            <select id="monthDropdown" class="dropbtn" onchange="selectMonth(this.value)">
+                <option value="" disabled selected hidden>--</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <input type="hidden" name="Month" id="Month" value="">
+        </div>
+
+        
+        <script>
+        //For Month
+        function selectMonth(month) {
+            document.getElementById("Month").value = month;
+        }
+        </script>
+        
+        <!-- Day -->
+        <div class="input-field">
+            <label for="Day">Day</label>
+            <input type="text" id="Day" name="Day" placeholder="Day" autocomplete="off">
+        </div>
+
+        <!--Property Type-->
+        <div class="input-field">
+            <label for="propertyTypeSelection">Property Type</label>
+            <select id="propertyTypeSelection" name="PropertyType" onchange="selectPropertyType(this.value)">
+            <option value="" disabled selected hidden>Select Property Type</option>
+            <option value="House">House</option>
+            <option value="Townhouse">Townhouse</option>
+            <option value="Unit/Apartment">Unit/Apartment</option>
+            </select>
+        <input type="hidden" name="Type_t" id="Type_t" value="0">
+        <input type="hidden" name="Type_u" id="Type_u" value="0">
+        </div>
+        <script>
+            //For Type
+            function selectPropertyType(selectedType) {
+                if (selectedType === 'House') {
+                    document.getElementById('Type_t').value = '0';
+                    document.getElementById('Type_u').value = '0';
+                } else if (selectedType === 'Townhouse') {
+                    document.getElementById('Type_t').value = '1';
+                    document.getElementById('Type_u').value = '0';
+                } else if (selectedType === 'Unit/Apartment') {
+                    document.getElementById('Type_t').value = '0';
+                    document.getElementById('Type_u').value = '1';
+                }
+            }        
+        </script>
+
+
+         <!--For region-->
+         <div class="region input-field">
+            <label for="regionSelection">Region</label>
+            <select id="regionSelection" name="Region" onchange="selectRegion(this.value)">
+                <option value="" disabled selected hidden>Choose Region</option>
+                <option value="Eastern Victoria">Eastern Victoria</option>
+                <option value="Northern Metropolitan">Northern Metropolitan</option>
+                <option value="Northern Victoria">Northern Victoria</option>
+                <option value="South-Eastern Metropolitan">South-Eastern Metropolitan</option>
+                <option value="Southern Metropolitan">Southern Metropolitan</option>
+                <option value="Western Metropolitan">Western Metropolitan</option>
+                <option value="Western Victoria">Western Victoria</option>
+            </select>
+            <!-- Hidden fields for regions -->
+            <input type="hidden" id="Regionname_Eastern_Victoria" name="Regionname_Eastern Victoria" value="0">
+            <input type="hidden" id="Regionname_Northern_Metropolitan" name="Regionname_Northern Metropolitan" value="0">
+            <input type="hidden" id="Regionname_Northern_Victoria" name="Regionname_Northern Victoria" value="0">
+            <input type="hidden" id="Regionname_South_Eastern_Metropolitan" name="Regionname_South-Eastern Metropolitan" value="0">
+            <input type="hidden" id="Regionname_Southern_Metropolitan" name="Regionname_Southern Metropolitan" value="0">
+            <input type="hidden" id="Regionname_Western_Metropolitan" name="Regionname_Western Metropolitan" value="0">
+            <input type="hidden" id="Regionname_Western_Victoria" name="Regionname_Western Victoria" value="0">
+        </div>
+        
+        <script>
+            // for Region
+            function selectRegion(selectedRegion) {
+                var regions = ['Eastern_Victoria', 'Northern_Metropolitan', 'Northern_Victoria', 'South_Eastern_Metropolitan', 'Southern_Metropolitan', 'Western_Metropolitan', 'Western_Victoria'];
+        
+                regions.forEach(region => {
+                    var element = document.getElementById('Regionname_' + region);
+                    if (region === selectedRegion.replaceAll(' ', '_')) {
+                        element.value = '1';
+                    } else {
+                        element.value = '0';
+                    }
+                });
+            }
+        </script>
+        
+
+       <!--Method type-->
+       <div class="method input-field">
+            <label for="methodSelection">Method of Sale</label>
+            <select id="methodSelection" name="Method" onchange="selectMethod(this.value)">
+            <option value="" disabled selected hidden>Select Method of Sale</option>
+            <option value="S">Property Sold</option>
+            <option value="SA">Sold After Auction</option>
+            <option value="SP">Property Sold Prior</option>
+            <option value="VB">Vendor Bid</option>
+            
+        </select>
+            <input type="hidden" name="Method_S" id="Method_S" value="0">
+            <input type="hidden" name="Method_SA" id="Method_SA" value="0">
+            <input type="hidden" name="Method_SP" id="Method_SP" value="0">
+            <input type="hidden" name="Method_VB" id="Method_VB" value="0">
+        </div>
+
+        <script>
+            //For Method
+            function selectMethod(selectedMethod) {
+                var methods = ['S', 'SA', 'SP', 'VB'];
+                methods.forEach(method => {
+                if (method === selectedMethod) {
+                    document.getElementById(`Method_${method}`).value = '1';
+                } else {
+                        document.getElementById(`Method_${method}`).value = '0';
+                        }
+                });
+            }
+        </script>
+
+        <!-- SellerG_encoded -->
+        <div class="input-field">
+            <label for="SellerG_encoded">SellerG Encoded</label>
+            <input type="text" id="SellerG_encoded" name="SellerG_encoded" placeholder="SellerG_encoded" autocomplete="off">
+        </div>
+        
+        <!--Model
+        <div class="model-container">
+            <div class="input-field">
+                <label for="modelSelection">Algorithm</label>
+                <select id="modelSelection" name="model">
+                    <option value="xgboost">XGBoost</option>
+                    <option value="random_forest">Random Forest</option>
+                    <option value="GBR">GBR</option>
+                </select>
+            </div>
+        </div>
+        -->
+
+    <!-- Button for predicition -->
+    <div class="button-container">
+        <button type="submit">Predict Price</button>
+    </div>        
+
+    <!-- display the prediction result -->
+    <p id="result" style="align-self: center;"></p>   
+
+    <!--For Graphs to display-->
+    <div id="chartContainer" style="display: none; text-align: center;">
+        <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+            <canvas id="inputFieldValuesChart" class="chart-canvas"></canvas>
+            <canvas id="predictedPricesChart" class="chart-canvas"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(event) {
+            event.preventDefault();  
+
+            var form = this;
+            var formData = new FormData(form);
+
+            // Send the form data to your Flask server
+            fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+            // Display the prediction result
+                var predictedPrice = data.prediction[0];
+                document.getElementById('result').innerText = 'Predicted Price: ' + predictedPrice;
+                document.getElementById('chartContainer').style.display = 'block';
+
+                // Chart for input field values
+                var contextInput = document.getElementById('inputFieldValuesChart').getContext('2d');
+                var inputChart = new Chart(contextInput, {
+                type: 'bar',
+                data: {
+                    labels: Array.from(formData.keys()),
+                    datasets: [{
+                        label: 'Input Field Values',
+                        data: Array.from(formData.values()),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            }
+                        }]
+                    },
+                    plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: function(value, context) {
+                            return context.dataset.data[context.dataIndex]; 
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Chart for predicted prices
+                var contextPredicted = document.getElementById('predictedPricesChart').getContext('2d');
+                var predictedChart = new Chart(contextPredicted, {
+                type: 'bar',
+                data: {
+                    labels: ['Predicted Price'],
+                    datasets: [{
+                        label: 'Predicted Price',
+                        data: [predictedPrice],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: function(value, context) {
+                            return context.dataset.data[context.dataIndex]; 
+                        }
+                    }
+                }
+                }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+            });
+            document.getElementById('chartContainer').style.display = 'none';
+
+        </script>
+    </div>
+</body>
+</html>
